@@ -1,0 +1,92 @@
+<section id="section-{{ section.id }}" class="single-sean-prod">
+    <div class="single-img">
+        {% for image in product.images %}
+            <img src="{{ image.src | product_img_url: 'large' }}">
+        {% endfor %}
+    </div>
+    <div class="single-content">
+        <h5 class="product-type">{{ product.type }}</h5>
+        <h2 class="product-title">{{ product.title }}</h2>
+        <div class="product-content">{{ product.content }}</div>
+        <h3 class="product-price"><span style="text-decoration: line-through;">{{ product.compare_at_price | money }}</span> {{ product.price | money }} <span class="sale-tag">SALE</span></h3>
+        {%- form 'product', product, class: 'product-cart' -%}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <h4>QUANTITY:</h4>
+            <quantity-input class="quantity">
+                <button class="quantity__button no-js-hidden" name="minus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape
+                        }}</span>
+                    {% render 'icon-minus' %}
+                </button>
+                <input class="quantity__input" type="number" name="quantity" id="quantity" min="1" value="1">
+                <button class="quantity__button no-js-hidden" name="plus" type="button">
+                    <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape
+                        }}</span>
+                    {% render 'icon-plus' %}
+                </button>
+            </quantity-input>
+            
+            {{ form | payment_terms }}
+        
+            <input type="submit" class="btn button" value="add to cart">
+        {%- endform -%}
+        
+    </div>
+</section>
+
+<style>
+    .product-title {
+        margin-bottom: 0;
+    }
+
+    .product-content {
+        margin-top: -10px;
+        margin-bottom: 30px;
+    }
+
+    .single-sean-prod {
+        max-width: 120rem;
+        margin: 50px auto;
+        padding: 0 5rem;
+        display: flex;
+    }
+
+    .single-img img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .product-price span {
+        margin-right: 10px;
+    }
+
+    .sale-tag {
+        background: rgb(0, 110, 0);
+        color: #fff;
+        font-weight: 900;
+        padding: 3px 16px;
+        margin-left: 10px;
+        font-size: 13px;
+        border-radius: 50px;
+    }
+
+    .product-cart h4 {
+        margin-bottom: 10px;
+    }
+
+    .quantity {
+        margin-bottom: 20px;
+    }
+
+    .product-cart .btn {
+        width: 100%;
+    }
+
+    @media(min-width: 1025px) {
+        .single-img,
+        .single-content {
+            width: 50%;
+            padding: 0 20px;
+        }
+    }
+</style>

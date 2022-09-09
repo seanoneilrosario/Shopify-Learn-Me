@@ -1,0 +1,14 @@
+product count: {{collection.all_products_count}}<hr>
+
+{% capture all_prods %}
+    {% for single_prods in collection.products %}
+        {% render 'product-lists', single_prods: single_prods %}
+    {% endfor %}
+{% endcapture %}
+
+{{ all_prods }}
+
+<script>
+    let colleection = {{ collection.products | json }};
+    console.log(colleection)
+</script>
