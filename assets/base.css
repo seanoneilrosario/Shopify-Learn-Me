@@ -5,6 +5,10 @@
 /* Peppa dog */
 
 /* HITO MAMA */
+.kaboom {
+  color: #fff;
+  background: red;
+}
 :root,
 .color-background-1 {
   --color-foreground: var(--color-base-text);
